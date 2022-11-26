@@ -49,7 +49,7 @@ public class UserWithRoles implements UserDetails {
   @Column(nullable = false, length = 60)
   String password;
 
-  @OneToOne(mappedBy = "userWithRoles", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "userWithRoles")
   private HasLoggedIn hasLoggedIn;
 
   @OneToOne(mappedBy = "userWithRoles", cascade = CascadeType.ALL)

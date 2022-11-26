@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/log/login")
@@ -22,6 +26,8 @@ public class HasLoggedInController {
 
   @GetMapping
   public List<HasLoggedInResponse> getAllLogins() {
+    //Clear logs that are over 30 days old
+    hasLoggedInService.clearLogsByDate(LocalDateTime.now().minusDays(30));
     return hasLoggedInService.getAllLogins();
   }
 

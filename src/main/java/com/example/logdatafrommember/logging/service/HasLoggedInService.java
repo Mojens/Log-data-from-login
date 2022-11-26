@@ -6,6 +6,10 @@ import com.example.logdatafrommember.logging.repository.HasLoggedInRepository;
 import com.example.logdatafrommember.security.entity.UserWithRoles;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +22,11 @@ public class HasLoggedInService {
     this.hasLoggedInRepository = hasLoggedInRepository;
   }
 
+  @Transactional
+  public void clearLogsByDate(LocalDateTime date) {
+    hasLoggedInRepository.deleteByLoginTimeLessThan(date);
+  }
+
   public void registerLogin(UserWithRoles userWithRoles) {
     HasLoggedIn hasLoggedIn = HasLoggedIn.builder()
         .userWithRoles(userWithRoles)
@@ -27,7 +36,7 @@ public class HasLoggedInService {
 
   public List<HasLoggedInResponse> getAllLogins() {
     List<HasLoggedIn> hasLoggedInList = hasLoggedInRepository.findAll();
-   return hasLoggedInList.stream().map(HasLoggedInResponse::new).collect(Collectors.toList());
+    return hasLoggedInList.stream().map(HasLoggedInResponse::new).collect(Collectors.toList());
   }
 
 }
