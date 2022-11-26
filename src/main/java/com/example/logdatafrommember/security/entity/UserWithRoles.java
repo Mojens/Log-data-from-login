@@ -2,6 +2,7 @@ package com.example.logdatafrommember.security.entity;
 
 
 import com.example.logdatafrommember.logging.entity.HasLoggedIn;
+import com.example.logdatafrommember.logging.entity.WhoReadTable;
 import com.example.logdatafrommember.security.dto.UserWithRolesRequest;
 import com.example.logdatafrommember.security.enums.Role;
 import lombok.*;
@@ -50,6 +51,9 @@ public class UserWithRoles implements UserDetails {
 
   @OneToOne(mappedBy = "userWithRoles", cascade = CascadeType.ALL)
   private HasLoggedIn hasLoggedIn;
+
+  @OneToOne(mappedBy = "userWithRoles", cascade = CascadeType.ALL)
+  private WhoReadTable whoReadTable;
   private boolean enabled = true;
 
   @CreationTimestamp

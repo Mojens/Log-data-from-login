@@ -82,10 +82,14 @@ public class SecurityConfig {
     http.authorizeHttpRequests((authorize) -> authorize
 
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/library/all").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET, "/api/library/{id}").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET, "/log/read/library/all").permitAll()
+        .antMatchers(HttpMethod.GET, "/log/login").permitAll()
 
 
         .antMatchers("/h2*/**").permitAll()
-        .antMatchers("/log/login").permitAll()
+
 
         .antMatchers("/").permitAll()
 
