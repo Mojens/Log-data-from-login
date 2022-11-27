@@ -26,7 +26,7 @@ public class HasLoggedInController {
   @GetMapping
   public List<HasLoggedInResponse> getAllLogins() {
     //Clear logs that are over 30 days old
-    hasLoggedInService.clearLogsByDate(LocalDateTime.now().minusDays(30));
+    hasLoggedInService.clearLogsByDate();
     return hasLoggedInService.getAllLogins();
   }
 

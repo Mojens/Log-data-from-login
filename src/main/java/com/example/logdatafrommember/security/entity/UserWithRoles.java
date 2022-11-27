@@ -52,7 +52,7 @@ public class UserWithRoles implements UserDetails {
   @OneToOne(mappedBy = "userWithRoles")
   private HasLoggedIn hasLoggedIn;
 
-  @OneToOne(mappedBy = "userWithRoles", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "userWithRoles")
   private WhoReadTable whoReadTable;
   private boolean enabled = true;
 
