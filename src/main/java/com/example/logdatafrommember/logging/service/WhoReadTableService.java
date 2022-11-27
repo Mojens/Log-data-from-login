@@ -29,7 +29,7 @@ public class WhoReadTableService {
 
   @Transactional
   public void clearWhoReadTable() {
-    whoReadTableRepository.deleteByReadTimeLessThan(LocalDateTime.now().minusDays(1));
+    whoReadTableRepository.deleteByReadTimeLessThan(LocalDateTime.now().minusDays(30));
   }
 
   public void registerRead(Principal p, String tableName) {
