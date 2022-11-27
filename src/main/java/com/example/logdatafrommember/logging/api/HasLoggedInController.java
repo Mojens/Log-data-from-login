@@ -2,16 +2,14 @@ package com.example.logdatafrommember.logging.api;
 
 import com.example.logdatafrommember.logging.dto.hasLoggedIn.HasLoggedInResponse;
 import com.example.logdatafrommember.logging.service.HasLoggedInService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.time.Instant;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/log/login")
@@ -24,6 +22,7 @@ public class HasLoggedInController {
     this.hasLoggedInService = hasLoggedInService;
   }
 
+  @PreAuthorize("hasAuthority('ADMIN')")
   @GetMapping
   public List<HasLoggedInResponse> getAllLogins() {
     //Clear logs that are over 30 days old

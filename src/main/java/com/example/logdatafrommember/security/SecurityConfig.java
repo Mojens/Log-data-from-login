@@ -81,11 +81,18 @@ public class SecurityConfig {
 
     http.authorizeHttpRequests((authorize) -> authorize
 
+
+        //api endpoints
+
         .antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-        .antMatchers(HttpMethod.GET, "/api/library/all").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.GET, "/api/library/{id}").hasAuthority("ADMIN")
-        .antMatchers(HttpMethod.GET, "/log/read/library/all").permitAll()
-        .antMatchers(HttpMethod.GET, "/log/login").permitAll()
+        .antMatchers(HttpMethod.GET, "/api/library/all").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET, "/api/library/{id}").hasAnyAuthority("ADMIN","USER")
+        .antMatchers(HttpMethod.GET,"/api/book/{id}").hasAnyAuthority("ADMIN","USER")
+
+        //log endpoints
+
+        .antMatchers(HttpMethod.GET, "/log/read/library/all").hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET, "/log/login").hasAuthority("ADMIN")
 
 
         .antMatchers("/h2*/**").permitAll()
