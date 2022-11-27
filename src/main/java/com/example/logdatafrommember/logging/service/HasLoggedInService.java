@@ -23,8 +23,8 @@ public class HasLoggedInService {
   }
 
   @Transactional
-  public void clearLogsByDate(LocalDateTime date) {
-    hasLoggedInRepository.deleteByLoginTimeLessThan(date);
+  public void clearLogsByDate() {
+    hasLoggedInRepository.deleteByLoginTimeLessThan(LocalDateTime.now().minusDays(30));
   }
 
   public void registerLogin(UserWithRoles userWithRoles) {

@@ -23,6 +23,7 @@ public class WhoReadTableController {
 
   @GetMapping("/library/all")
   public List<WhoReadTableResponse> getAllReads() {
+    whoReadTableService.clearWhoReadTable();
     return whoReadTableService.getAllReads();
   }
 }
